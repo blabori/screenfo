@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Screenfo", "Screenfo.csproj", "{BA4656FA-9090-41EE-8FF5-2763A48A83C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenfoDemo", "..\ScreenfoDemo\ScreenfoDemo.csproj", "{34EC38AD-48F9-4DC7-8A12-E26E4618AA45}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA4656FA-9090-41EE-8FF5-2763A48A83C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA4656FA-9090-41EE-8FF5-2763A48A83C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA4656FA-9090-41EE-8FF5-2763A48A83C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA4656FA-9090-41EE-8FF5-2763A48A83C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34EC38AD-48F9-4DC7-8A12-E26E4618AA45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34EC38AD-48F9-4DC7-8A12-E26E4618AA45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34EC38AD-48F9-4DC7-8A12-E26E4618AA45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34EC38AD-48F9-4DC7-8A12-E26E4618AA45}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
