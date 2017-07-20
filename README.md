@@ -7,4 +7,4 @@ Serial numbers and model names of display devices can easily be gathered by WMI 
 # Remarks
 Struct and function definitions were mostly taken from pInvoke.net, the extraction of the EDID from registry is based on the code from Roger Zander (rzander), see [here]. 
 
-[here]: [https://github.com/rzander/MonitorDetails/blob/master/DisplayInfoWMIProvider/WMIProvider.cs
+[here]: https://github.com/rzander/MonitorDetails/blob/master/DisplayInfoWMIProvider/WMIProvider.cs
