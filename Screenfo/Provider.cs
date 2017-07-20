@@ -2,8 +2,6 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
-using System.Drawing;
 using Microsoft.Win32;
 
 namespace Screenfo
@@ -103,18 +101,7 @@ namespace Screenfo
 
                         // get EDID block to parse VESA information
                         byte[] edid = { 0, 0, 0, 0 };
-                        try
-                        {
-                            edid = GetMonitorEDID(deviceInfo, deviceInfoData);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.Error.WriteLine(e.Message);
-                            Marshal.FreeHGlobal(instanceBuf);
-                            Win32.SetupDiDestroyDeviceInfoList(deviceInfo);
-                            return null;
-
-                        }
+                        edid = GetMonitorEDID(deviceInfo, deviceInfoData);
 
                         // create search keys
                         string sSerFind = new string(new char[] { (char)00, (char)00, (char)00, (char)0xff });
@@ -128,6 +115,8 @@ namespace Screenfo
 
                         string sSerial = "";
                         string sModel = "";
+                        var horRes = ((edid[54 + 4] >> 4) << 8) | edid[54 + 2];
+                        var vertRes = ((edid[54 + 7] >> 4) << 8) | edid[54 + 5];
 
                         // do the search
                         foreach (string sDesc in sDescriptor)
@@ -143,52 +132,12 @@ namespace Screenfo
                             }
                         }
 
-                        Win32.DISPLAY_DEVICE display = new Win32.DISPLAY_DEVICE();
-                        Win32.DISPLAY_DEVICE displayInfo = new Win32.DISPLAY_DEVICE();
-                        display.cbSize = Marshal.SizeOf(display);
-                        displayInfo.cbSize = Marshal.SizeOf(displayInfo);
-
-                        bool found = false;
-
-                        try
-                        {
-                            for (uint id = 0; Win32.EnumDisplayDevices(IntPtr.Zero, id, ref display, 0); id++)
-                            {
-                                Win32.EnumDisplayDevices(display.DeviceName, 0, ref displayInfo, Win32.EDD_GET_DEVICE_INTERFACE_NAME);
-
-                                if (displayInfo.DeviceID.ToLower() == detail.DevicePath.ToLower())
-                                {
-                                    // Match!
-                                    foreach (Screen screen in Screen.AllScreens)
-                                    {
-                                        if (display.DeviceName == screen.DeviceName)
-                                        {
-                                            listOfConnectedMonitors.Add(new Monitor(display.DeviceName, sModel, sSerial, screen.Bounds.Width, screen.Bounds.Height));
-                                            found = true;
-                                            break;
-                                        }
-
-                                    }
-                                }
-
-                                display.cbSize = Marshal.SizeOf(display);
-                                displayInfo.cbSize = Marshal.SizeOf(displayInfo);
-
-                                if (found)
-                                {
-                                    break;
-                                }
-
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.Error.WriteLine(String.Format("{0}", ex.ToString()));
-                        }
+                        listOfConnectedMonitors.Add(new Monitor(sModel, sSerial, horRes, vertRes));
 
                         Marshal.FreeHGlobal(instanceBuf);
 
                     }
+
                     i++;
                 }
 
